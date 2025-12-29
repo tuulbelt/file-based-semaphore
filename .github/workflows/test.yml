@@ -44,8 +44,11 @@ jobs:
 
       - name: Verify zero runtime dependencies
         run: |
-          if grep -A 10 '^\[dependencies\]' Cargo.toml | grep -q '^[a-z]'; then
+          # Extract [dependencies] section, remove comments and empty lines
+          DEPS=$(sed -n '/^\[dependencies\]/,/^\[/p' Cargo.toml | grep -v '^\[' | grep -v '^#' | grep -v '^$')
+          if [ -n "$DEPS" ]; then
             echo "ERROR: Runtime dependencies found!"
+            echo "$DEPS"
             exit 1
           fi
           echo "✓ Zero runtime dependencies confirmed"
