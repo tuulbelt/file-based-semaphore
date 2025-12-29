@@ -4,7 +4,7 @@
 ![Version](https://img.shields.io/badge/version-0.1.0-blue)
 ![Rust](https://img.shields.io/badge/rust-1.70%2B-orange)
 ![Zero Dependencies](https://img.shields.io/badge/dependencies-0-success)
-![Tests](https://img.shields.io/badge/tests-46%20passing-success)
+![Tests](https://img.shields.io/badge/tests-95%20passing-success)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
 Cross-platform file-based semaphore for process coordination.
@@ -267,8 +267,8 @@ See `DOGFOODING_STRATEGY.md` for implementation details.
 
 ## Related Tools
 
-- [Test Flakiness Detector](../test-flakiness-detector/) - Validates this tool's test suite reliability
-- [CLI Progress Reporting](../cli-progress-reporting/) - Could use this tool for exclusive log access
+- [Test Flakiness Detector](https://github.com/tuulbelt/test-flakiness-detector) - Validates this tool's test suite reliability
+- [CLI Progress Reporting](https://github.com/tuulbelt/cli-progress-reporting) - Could use this tool for exclusive log access
 
 
 
@@ -297,6 +297,12 @@ See `DOGFOODING_STRATEGY.md` for implementation details.
 **[▶ View interactive recording on asciinema.org](https://asciinema.org/a/cXPn7H1GRZqczgjy7q79Uc8JY)**
 
 > Try it online: [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/tuulbelt/tuulbelt/tree/main/file-based-semaphore)
+
+---
+
+**Part of [Tuulbelt](https://github.com/tuulbelt/tuulbelt)** - A collection of focused, zero-dependency tools for modern software development.
+
+Report issues at: https://github.com/tuulbelt/tuulbelt/issues
 
 ## License
 

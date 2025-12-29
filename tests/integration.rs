@@ -82,7 +82,7 @@ fn test_sequential_acquire_release() {
         {
             let guard = sem
                 .try_acquire()
-                .expect(&format!("Failed to acquire on iteration {}", i));
+                .unwrap_or_else(|_| panic!("Failed to acquire on iteration {}", i));
             assert!(sem.is_locked());
             // Guard drops here, releasing the lock
             drop(guard);
