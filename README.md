@@ -1,6 +1,6 @@
 # File-Based Semaphore
 
-[![Tests](https://github.com/tuulbelt/tuulbelt/actions/workflows/test-all-tools.yml/badge.svg)](https://github.com/tuulbelt/tuulbelt/actions/workflows/test-all-tools.yml)
+[![Tests](https://github.com/tuulbelt/file-based-semaphore/actions/workflows/test.yml/badge.svg)](https://github.com/tuulbelt/file-based-semaphore/actions/workflows/test.yml)
 ![Version](https://img.shields.io/badge/version-0.1.0-blue)
 ![Rust](https://img.shields.io/badge/rust-1.70%2B-orange)
 ![Zero Dependencies](https://img.shields.io/badge/dependencies-0-success)

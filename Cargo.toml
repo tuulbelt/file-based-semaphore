@@ -5,6 +5,7 @@ edition = "2021"
 description = "Cross-platform file-based semaphore for process coordination"
 license = "MIT"
 repository = "https://github.com/tuulbelt/file-based-semaphore"
+homepage = "https://tuulbelt.github.io/tuulbelt/tools/file-based-semaphore/"
 readme = "README.md"
 keywords = ["tuulbelt", "semaphore", "lock", "process", "coordination"]
 categories = ["concurrency", "command-line-utilities"]

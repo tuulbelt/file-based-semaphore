@@ -3,13 +3,8 @@ name: Test
 on:
   push:
     branches: [main]
-    paths:
-      - 'file-based-semaphore/**'
-      - '.github/workflows/test-all-tools.yml'
   pull_request:
     branches: [main]
-    paths:
-      - 'file-based-semaphore/**'
 
 # Cancel in-progress runs when new commits are pushed
 concurrency:
@@ -34,21 +29,23 @@ jobs:
 
       - name: Cache cargo
         uses: Swatinem/rust-cache@v2
-        with:
-          workspaces: "file-based-semaphore -> target"
 
       - name: Check formatting (fail fast)
-        working-directory: file-based-semaphore
         run: cargo fmt --all -- --check
 
       - name: Run clippy (fail fast)
-        working-directory: file-based-semaphore
         run: cargo clippy --all-targets --all-features -- -D warnings
 
       - name: Run tests
-        working-directory: file-based-semaphore
         run: cargo test --all-features
 
       - name: Build release
-        working-directory: file-based-semaphore
         run: cargo build --release
+
+      - name: Verify zero runtime dependencies
+        run: |
+          if grep -A 10 '^\[dependencies\]' Cargo.toml | grep -q '^[a-z]'; then
+            echo "ERROR: Runtime dependencies found!"
+            exit 1
+          fi
+          echo "✓ Zero runtime dependencies confirmed"
