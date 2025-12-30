@@ -270,8 +270,13 @@ See `DOGFOODING_STRATEGY.md` for implementation details.
 - [Test Flakiness Detector](https://github.com/tuulbelt/test-flakiness-detector) - Validates this tool's test suite reliability
 - [CLI Progress Reporting](https://github.com/tuulbelt/cli-progress-reporting) - Could use this tool for exclusive log access
 
+## Security
 
-
+- **Tag injection prevention**: Newline characters (`\n`, `\r`) in tags are sanitized to spaces, preventing injection of fake key-value pairs into lock files
+- **Atomic file operations**: Uses `O_CREAT | O_EXCL` for atomic lock creation, preventing race conditions
+- **Stale lock detection**: Automatically detects and recovers from crashed processes, preventing denial of service
+- **No privilege escalation**: Lock files created with standard user permissions
+- **Zero runtime dependencies**: No supply chain risk from external packages
 
 
 

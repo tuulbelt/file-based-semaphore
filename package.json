@@ -1,0 +1,13 @@
+{
+  "name": "@tuulbelt/file-based-semaphore",
+  "version": "0.1.0",
+  "description": "Cross-platform file-based semaphore for process synchronization in Rust",
+  "private": true,
+  "scripts": {
+    "dogfood": "npm run dogfood:flaky",
+    "dogfood:flaky": "flaky --test 'cargo test' --runs 20"
+  },
+  "devDependencies": {
+    "@tuulbelt/test-flakiness-detector": "git+https://github.com/tuulbelt/test-flakiness-detector.git"
+  }
+}
