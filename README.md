@@ -305,4 +305,4 @@ See `DOGFOODING_STRATEGY.md` for implementation details.
 
 ## License
 
-MIT - see [LICENSE](LICENSE)
+MIT — see [LICENSE](LICENSE)
