@@ -7,6 +7,8 @@
 ![Tests](https://img.shields.io/badge/tests-95%20passing-success)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
+**Part of [Tuulbelt](https://github.com/tuulbelt/tuulbelt)** — A collection of focused, zero-dependency tools
+
 Cross-platform file-based semaphore for process coordination.
 
 ## Problem
