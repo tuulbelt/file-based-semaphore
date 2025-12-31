@@ -1,4 +1,4 @@
-# File-Based Semaphore
+# File-Based Semaphore / `sema`
 
 [![Tests](https://github.com/tuulbelt/file-based-semaphore/actions/workflows/test.yml/badge.svg)](https://github.com/tuulbelt/file-based-semaphore/actions/workflows/test.yml)
 ![Version](https://img.shields.io/badge/version-0.1.0-blue)
