@@ -1,0 +1,13 @@
+{"version": 2, "width": 80, "height": 24, "timestamp": 1767146421, "env": {"SHELL": "/bin/bash", "TERM": "xterm-256color"}, "title": "File Based Semaphore / sema - Tuulbelt"}
+[0.004425, "o", "# Step 1: Install globally\r\n"]
+[0.506346, "o", "$ cargo install --path .\r\n"]
+[1.507856, "o", "\r\n# Step 2: View available commands\r\n"]
+[2.009733, "o", "$ sema --help\r\n"]
+[2.512574, "o", "file-semaphore 0.1.0\r\n\r\nCross-platform file-based semaphore for process coordination.\r\n\r\nUSAGE:\r\n    file-semaphore <COMMAND> <LOCK_PATH> [OPTIONS]\r\n\r\nCOMMANDS:\r\n    acquire     Acquire a lock (blocks until available or timeout)\r\n    try         Try to acquire a lock without blocking\r\n    release     Release a lock (force remove lock file)\r\n    status      Show lock status and holder information\r\n    wait        Wait for a lock to be released\r\n\r\nOPTIONS:\r\n    --timeout <SECONDS>     Timeout for acquire/wait operations (default: no timeout)\r\n    --stale <SECONDS>       Stale lock timeout (default: 3600)\r\n    --tag <STRING>          Tag to include in lock info\r\n    --json                  Output status in JSON format\r\n    --quiet, -q             Suppress non-essential output\r\n    --help, -h              Show this help message\r\n    --version, -V           Show version\r\n\r\nEXAMPLES:\r\n    # Try to acquire a lock (non-blocking)\r\n    file-semaphore try /tmp/my.lock\r\n\r\n    # Acquire a lock with 10 second timeout\r\n    file-semaphore acquire /tmp/my.lock --timeout 10\r\n\r\n    # Check lock status\r\n    file-semaphore status /tmp/my.lock\r\n\r\n    # Release/force-remove a lock\r\n    file-semaphore release /tmp/my.lock\r\n\r\n    # Wait for a lock to be released\r\n    file-semaphore wait /tmp/my.lock --timeout 30\r\n\r\nEXIT CODES:\r\n    0   Success (lock acquired/released, or lock is free)\r\n    1   Lock already held (for try/acquire with timeout)\r\n    2   Invalid arguments or usage error\r\n    3   IO or system error\r\n\r\n"]
+[5.514426, "o", "\r\n# Step 3: Try to acquire lock (non-blocking)\r\n"]
+[6.016081, "o", "$ sema try /tmp/demo.lock --tag \"demo process\"\r\n"]
+[6.521362, "o", "Lock acquired: /tmp/demo.lock\r\n"]
+[6.521603, "o", "✓ Lock acquired!\r\n"]
+[8.522964, "o", "\r\n# Step 4: Check lock status\r\n"]
+[9.024628, "o", "$ sema status /tmp/demo.lock\r\n"]
+[9.527284, "o", "Lock status: LOCKED\r\n  Path: /tmp/demo.lock\r\n  PID: 7109\r\n  Timestamp: 1767146427\r\n  Tag: demo process\r\n  Process running: no\r\n"]
