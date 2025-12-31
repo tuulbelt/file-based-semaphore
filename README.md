@@ -303,12 +303,6 @@ See `DOGFOODING_STRATEGY.md` for implementation details.
 
 > Try it online: [![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/tuulbelt/file-based-semaphore)
 
----
-
-**Part of [Tuulbelt](https://github.com/tuulbelt/tuulbelt)** - A collection of focused, zero-dependency tools for modern software development.
-
-Report issues at: https://github.com/tuulbelt/tuulbelt/issues
-
 ## License
 
 MIT - see [LICENSE](LICENSE)
