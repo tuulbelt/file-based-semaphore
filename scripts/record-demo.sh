@@ -1,89 +1,93 @@
 #!/bin/bash
-# Record File-Based Semaphore demo
+# Record File-Based Semaphore (Rust) demo
 source "$(dirname "$0")/lib/demo-framework.sh"
 
 TOOL_NAME="file-based-semaphore"
 SHORT_NAME="sema"
 LANGUAGE="rust"
 
-# Lock file for demo
-LOCK_FILE="/tmp/demo.lock"
-
-demo_setup() {
-  rm -f "$LOCK_FILE"
-}
-
-demo_cleanup() {
-  rm -f "$LOCK_FILE"
-}
+# GIF parameters
+GIF_COLS=100
+GIF_ROWS=30
+GIF_SPEED=1.0
+GIF_FONT_SIZE=14
 
 demo_commands() {
-  echo "# File-Based Semaphore Demo"
+  # ═══════════════════════════════════════════
+  # File-Based Semaphore / sema - Tuulbelt
+  # ═══════════════════════════════════════════
+
+  # Step 1: Installation
+  echo "# Step 1: Install globally"
+  sleep 0.5
+  echo "$ cargo install --path ."
   sleep 1
 
+  # Step 2: View help
   echo ""
-  echo "# 1. Acquire a lock (non-blocking)"
+  echo "# Step 2: View available commands"
   sleep 0.5
-  echo "$ sema try $LOCK_FILE --tag demo"
-  sleep 0.3
-  $BIN try $LOCK_FILE --tag demo
-  sleep 1
+  echo "$ sema --help"
+  sleep 0.5
+  "$BIN" --help | head -30
+  sleep 3
 
+  # Step 3: Try to acquire lock (non-blocking)
   echo ""
-  echo "# 2. Check lock status"
+  echo "# Step 3: Try to acquire lock (non-blocking)"
   sleep 0.5
-  echo "$ sema status $LOCK_FILE"
-  sleep 0.3
-  $BIN status $LOCK_FILE || true
-  sleep 1.5
-
-  echo ""
-  echo "# 3. Check status with JSON output"
+  echo "$ sema try /tmp/demo.lock --tag \"demo process\""
   sleep 0.5
-  echo "$ sema status $LOCK_FILE --json"
-  sleep 0.3
-  $BIN status $LOCK_FILE --json || true
-  sleep 1.5
-
-  echo ""
-  echo "# 4. Release the lock"
-  sleep 0.5
-  echo "$ sema release $LOCK_FILE"
-  sleep 0.3
-  $BIN release $LOCK_FILE
-  sleep 1
-
-  echo ""
-  echo "# 5. Verify lock is released"
-  sleep 0.5
-  echo "$ sema status $LOCK_FILE"
-  sleep 0.3
-  $BIN status $LOCK_FILE || true
-  sleep 1.5
-
-  echo ""
-  echo "# 6. Demo stale lock recovery"
-  sleep 0.5
-  echo "# Creating a stale lock (old timestamp, dead PID)..."
-  OLD_TS=$(($(date +%s) - 7200))
-  echo "pid=99999" > $LOCK_FILE
-  echo "timestamp=$OLD_TS" >> $LOCK_FILE
-  sleep 0.5
-  echo "$ cat $LOCK_FILE"
-  cat $LOCK_FILE
-  sleep 1
-
-  echo ""
-  echo "# Acquiring stale lock (--stale 3600 = 1 hour threshold)"
-  sleep 0.5
-  echo "$ sema try $LOCK_FILE --stale 3600"
-  sleep 0.3
-  $BIN try $LOCK_FILE --stale 3600
-  sleep 1.5
-
-  echo ""
-  echo "# Done! File-based semaphore with the sema command."
+  "$BIN" try /tmp/demo.lock --tag "demo process"
+  echo "✓ Lock acquired!"
   sleep 2
+
+  # Step 4: Check lock status
+  echo ""
+  echo "# Step 4: Check lock status"
+  sleep 0.5
+  echo "$ sema status /tmp/demo.lock"
+  sleep 0.5
+  "$BIN" status /tmp/demo.lock
+  sleep 2
+
+  # Step 5: Try to acquire again (should fail)
+  echo ""
+  echo "# Step 5: Try to acquire again (should fail)"
+  sleep 0.5
+  echo "$ sema try /tmp/demo.lock --tag \"second process\""
+  sleep 0.5
+  "$BIN" try /tmp/demo.lock --tag "second process" || echo "✓ Lock held by first process"
+  sleep 2
+
+  # Step 6: Release lock
+  echo ""
+  echo "# Step 6: Release lock"
+  sleep 0.5
+  echo "$ sema release /tmp/demo.lock"
+  sleep 0.5
+  "$BIN" release /tmp/demo.lock
+  echo "✓ Lock released"
+  sleep 2
+
+  # Step 7: Acquire with timeout and JSON status
+  echo ""
+  echo "# Step 7: Acquire with timeout, check JSON status"
+  sleep 0.5
+  echo "$ sema acquire /tmp/demo.lock --timeout 5 --tag \"timed lock\""
+  "$BIN" acquire /tmp/demo.lock --timeout 5 --tag "timed lock"
+  sleep 0.5
+  echo "$ sema status /tmp/demo.lock --json"
+  "$BIN" status /tmp/demo.lock --json
+  sleep 2
+  "$BIN" release /tmp/demo.lock
+
+  # Cleanup
+  rm -f /tmp/demo.lock
+
+  echo ""
+  echo "# Done! Coordinate processes with: sema acquire <path>"
+  sleep 1
 }
 
 run_demo
